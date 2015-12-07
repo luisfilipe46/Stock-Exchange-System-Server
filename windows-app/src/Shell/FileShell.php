@@ -10,6 +10,8 @@ use App\WindowsNotification;
 class FileShell extends Shell
 {
     public function authentication() {
+        Debugger::dump('starting authentication');
+
         $token = isset($_GET["token"]) ? $_GET["token"] : null;
         //If token request
         if($token !== null)
