@@ -2,6 +2,7 @@
 namespace App\Shell;
 
 use Cake\Console\Shell;
+use Cake\Error\Debugger;
 use Cake\I18n\Time;
 use Cake\Network\Http\Client;
 
@@ -14,6 +15,7 @@ class FileShell extends Shell
         $tick_names = $this->Stocks->find()->distinct(['tick_name'])->toArray();
         for ($i = 0; $i < sizeof($tick_names); $i++) {
             $response = $http->get('http://finance.yahoo.com/d/quotes?f=sl1d1t1v&s='.$tick_names[$i]['tick_name']);
+            Debugger::dump($response);
             $responses[] = $response.'\n';
         }
 
