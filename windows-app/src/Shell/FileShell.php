@@ -20,7 +20,7 @@ class FileShell extends Shell
         //If token request
         if($token !== null)
         {     //init the WindowsNotification Class
-            $Notifier = new WindowsNotification\WindowsNotificationClass();
+            $Notifier = new WindowsNotificationClass();
             $Auth = $Notifier->AuthenticateService();
             if($Auth->response_status == 200)
             {
