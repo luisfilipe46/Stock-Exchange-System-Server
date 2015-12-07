@@ -25,8 +25,8 @@ class FileShell extends Shell
         //$stuff = implode(",",$tick_names);
         //$stuff = implode(",",$tick_names_and_values);
         for ($i=0; $i < sizeof($tick_names_and_values); $i++) {
-            $stocksAffectedMax[] = $this->Stocks->find()->where(['maximum <=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
-            $stocksAffectedMin[] = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
+            $stocksAffectedMax = $this->Stocks->find()->where(['maximum <=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
+            $stocksAffectedMin = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
         }
 
         for ($i=0; $i < sizeof($stocksAffectedMax); $i++) {
