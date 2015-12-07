@@ -29,11 +29,13 @@ class FileShell extends Shell
             $stocksAffectedMin = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
         }
 
+        Debugger::dump($stocksAffectedMax);
+
         for ($i=0; $i < sizeof($stocksAffectedMax); $i++) {
-            $stuff[] = $this->Stocks->find($stocksAffectedMax[$i]['device_id']);
+            $stuff[] = $this->Devices->find($stocksAffectedMax[$i]['device_id']);
         }
         for ($i=0; $i < sizeof($stocksAffectedMin); $i++) {
-            $stuff[] = $this->Stocks->find($stocksAffectedMin[$i]['device_id']);
+            $stuff[] = $this->Devices->find($stocksAffectedMin[$i]['device_id']);
         }
 
         $now = Time::now();
