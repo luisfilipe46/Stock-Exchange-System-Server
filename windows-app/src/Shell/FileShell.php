@@ -5,6 +5,7 @@ use Cake\Console\Shell;
 use Cake\Error\Debugger;
 use Cake\I18n\Time;
 use Cake\Network\Http\Client;
+use App\WindowsNotification\WindowsNotificationClass;
 //use App\WindowsNotification;
 
 require_once(APP . DS . 'WindowsNotification' . DS . 'WindowsNotification.php');
