@@ -85,7 +85,7 @@ namespace App\WindowsNotification
             curl_setopt($request, CURLOPT_SSL_VERIFYPEER, 0);
             $response = curl_exec($request);
             $response = json_decode($response);
-            $response->token_type =  ucfirst($response->token_type);
+            $response->token_type =  isset($response->token_type) ? ucfirst($response->token_type) : "Bearer";
             $response->response_status = curl_getinfo($request,CURLINFO_HTTP_CODE);
             return $response;
         }
