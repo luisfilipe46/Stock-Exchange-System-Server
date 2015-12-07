@@ -13,6 +13,7 @@ class FileShell extends Shell
         Debugger::dump('starting authentication');
 
         $token = isset($_GET["token"]) ? $_GET["token"] : null;
+        $token = 'aishdasd4564';
         //If token request
         if($token !== null)
         {     //init the WindowsNotification Class
