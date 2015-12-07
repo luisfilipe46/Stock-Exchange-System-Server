@@ -18,12 +18,8 @@ class FileShell extends Shell
             $response = $http->get('http://download.finance.yahoo.com/d/quotes?f=sl1d1t1v&s='.$someStocks[$i]['tick_name']);
             $tick_name = explode(",",$response->body())[0];
             $tick_names_and_values[] = [str_replace("\"", "", $tick_name), explode(",",$response->body())[1]];
-            //$tick_names[] = str_replace("\"", "", $tick_name);
-            //$actualValue[] = explode(",",$response->body())[1];
         }
 
-        //$stuff = implode(",",$tick_names);
-        //$stuff = implode(",",$tick_names_and_values);
         for ($i=0; $i < sizeof($tick_names_and_values); $i++) {
             $stocksAffectedMax = $this->Stocks->find()->where(['maximum <=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
             $stocksAffectedMin = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
@@ -33,11 +29,10 @@ class FileShell extends Shell
 
         for ($i=0; $i < sizeof($stocksAffectedMax); $i++) {
             $id = $stocksAffectedMax[$i]['device_id'];
-            Debugger::dump($id);
             $stuff[] = $this->Devices->get($id, [
                 'contain' => []
             ]);
-            //$stuff[] = $this->Devices->find()->where(['id =' => $stocksAffectedMax[$i]['device_id']]);
+            //SEND MSG
         }
         for ($i=0; $i < sizeof($stocksAffectedMin); $i++) {
             $id = $stocksAffectedMin[$i]['device_id'];
@@ -45,6 +40,7 @@ class FileShell extends Shell
             $stuff[] = $this->Devices->get($id, [
                 'contain' => []
             ]);
+            //SEND MSG
         }
 
         $stuff = implode(",", $stuff);
