@@ -25,7 +25,7 @@
         "psr-4": {
             "App\\": "src"
         },
-        "classmap": [
+        "files": [
             "src/WindowsNotification/WindowsNotification.php"
         ]
     },
@@ -34,7 +34,7 @@
             "App\\Test\\": "tests",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         },
-        "classmap": [
+        "files": [
             "src/WindowsNotification/WindowsNotification.php"
         ]
     },
