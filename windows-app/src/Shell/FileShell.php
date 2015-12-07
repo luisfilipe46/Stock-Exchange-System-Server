@@ -56,8 +56,6 @@ class FileShell extends Shell
             $stocksAffectedMin = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
         }
 
-        Debugger::dump($stocksAffectedMax);
-
         for ($i=0; $i < sizeof($stocksAffectedMax); $i++) {
             $id = $stocksAffectedMax[$i]['device_id'];
             $stuff[] = $this->Devices->get($id, [
@@ -67,7 +65,6 @@ class FileShell extends Shell
         }
         for ($i=0; $i < sizeof($stocksAffectedMin); $i++) {
             $id = $stocksAffectedMin[$i]['device_id'];
-            Debugger::dump($id);
             $stuff[] = $this->Devices->get($id, [
                 'contain' => []
             ]);
