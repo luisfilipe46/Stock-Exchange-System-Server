@@ -5,7 +5,7 @@ use Cake\Console\Shell;
 use Cake\Error\Debugger;
 use Cake\I18n\Time;
 use Cake\Network\Http\Client;
-use App\WindowsNotification\WindowsNotificationClass;
+use App\WindowsNotification;
 
 class FileShell extends Shell
 {
@@ -17,7 +17,7 @@ class FileShell extends Shell
         //If token request
         if($token !== null)
         {     //init the WindowsNotification Class
-            $Notifier = new WindowsNotificationClass();
+            $Notifier = new WindowsNotification\WindowsNotificationClass();
             $Auth = $Notifier->AuthenticateService();
             if($Auth->response_status == 200)
             {
