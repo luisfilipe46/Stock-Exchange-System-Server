@@ -20,8 +20,6 @@ namespace App\WindowsNotification
          * @see https://msdn.microsoft.com/en-us/library/windows/apps/hh465407.aspx
          * @var string
          */
-        //private static $SID = "ms­app://s­1­15­2­3499647505­2755797929­4128354218­2078134981­2066966101­1990600995­916844598";
-        //private static $SID = "ms-app://s-1-15-2-7517944-2102956592-847385009-1620487831-2475186946-440704142-3222778260";
         private static $SID = "ms-app://s-1-15-2-3499647505-2755797929-4128354218-2078134981-2066966101-1990600995-916844598";
 
         /**
@@ -29,9 +27,6 @@ namespace App\WindowsNotification
          * @see https://msdn.microsoft.com/en-us/library/windows/apps/hh465407.aspx
          * @var string
          */
-        //private static $ClientSecret = "G+Eu7i0l+w881MOXHhNaMZBUQ/tx+mkd";
-
-        //private static $ClientSecret = "cdJpJ6kmSPpAYBPRECs2mFtYvuTZBGyy";
         private static $ClientSecret = "G+Eu7i0l+w881MOXHhNaMZBUQ/tx+mkd";
 
         /**
