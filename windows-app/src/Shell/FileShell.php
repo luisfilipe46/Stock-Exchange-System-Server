@@ -47,6 +47,7 @@ class FileShell extends Shell
             ]);
         }
 
+        $stuff = implode(",", $stuff);
         $now = Time::now();
         $this->createFile('/home/demo/files_created_each_minute/'.$now->i18nFormat('yyyy-MM-dd HH:mm:ss').'.txt', $stuff);
 
