@@ -18,11 +18,13 @@ class FileShell extends Shell
             $Auth = $Notifier->AuthenticateService();
             if($Auth->response_status == 200)
             {
+                Debugger::dump('creating token file GOOD');
                 $this->createFile('/home/demo/token/token.txt', $token);
                 //Save the token on permanent support (db, file, etc.)
             }
             else
             {
+                Debugger::dump('creating token file BAD');
                 $this->createFile('/home/demo/token/token.txt', 'token not generated\n'.$token);
                 //do stuff for errors
             }
