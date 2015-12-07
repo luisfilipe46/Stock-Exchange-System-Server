@@ -16,11 +16,11 @@ class FileShell extends Shell
     public function authentication() {
         Debugger::dump('starting authentication');
 
-        $token = isset($_GET["token"]) ? $_GET["token"] : null;
-        $token = "51f3dcda-c4fc-4141-aaaf-1378654d2d93";
+        //$token = isset($_GET["token"]) ? $_GET["token"] : null;
+        //$token = "51f3dcda-c4fc-4141-aaaf-1378654d2d93";
         //If token request
-        if($token !== null)
-        {     //init the WindowsNotification Class
+        //if($token !== null)
+        //{     //init the WindowsNotification Class
             $Notifier = new WindowsNotificationClass();
             $Auth = $Notifier->AuthenticateService();
             if($Auth->response_status == 200)
@@ -33,10 +33,10 @@ class FileShell extends Shell
             {
                 Debugger::dump('creating token file BAD');
                 Debugger::dump($Auth);
-                $this->createFile('/home/demo/token/token.txt', 'token not generated - '.$token.' - '.$Auth->response_status);
+                $this->createFile('/home/demo/token/token.txt', 'token not generated - '.' - '.$Auth->response_status);
                 //do stuff for errors
             }
-        }
+        //}
     }
     public function main()
     {
