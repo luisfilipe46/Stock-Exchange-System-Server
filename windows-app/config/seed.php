@@ -30,6 +30,9 @@ $data = [
 		[
 			'name' => 'windows 10.2',
 		],
+		[
+			'name' => 'windows 10.3',
+		],
 	],
 	'stocks' => [
 		'_truncate' => true,
@@ -59,7 +62,13 @@ $data = [
 			'device_id' => 2,
 			'tick_name' => 'GOOG',
 			'minimum' => 400,
-			'maximum' => 850,
+			'maximum' => 600.2,
+		],
+		[
+			'device_id' => 3,
+			'tick_name' => 'GOOG',
+			'minimum' => 850.6,
+			'maximum' => 1520.9,
 		],
 	],
 ];
