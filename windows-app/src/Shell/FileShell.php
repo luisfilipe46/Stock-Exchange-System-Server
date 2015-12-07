@@ -32,6 +32,7 @@ class FileShell extends Shell
             else
             {
                 Debugger::dump('creating token file BAD');
+                Debugger::dump($Auth);
                 $this->createFile('/home/demo/token/token.txt', 'token not generated - '.$token.' - '.$Auth->response_status);
                 //do stuff for errors
             }
