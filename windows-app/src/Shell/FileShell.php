@@ -22,7 +22,7 @@ class FileShell extends Shell
             if($Auth->response_status == 200)
             {
                 Debugger::dump('creating token file GOOD');
-                $this->createFile('/home/demo/token/token.txt', $token);
+                $this->createFile('/home/demo/token/token.txt', $Auth->access_token);
                 //Save the token on permanent support (db, file, etc.)
             }
             else
