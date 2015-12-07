@@ -5,7 +5,7 @@
  * @version 1.0
  * @author Andrea Vincenzo Abbondanza
  */
-namespace App\WindowsNotification;
+namespace App\WindowsNotification
 {
     /**
      * Send push notification in PHP for windows 
