@@ -1,3 +1,4 @@
+<?php
 namespace App\Shell;
 
 use Cake\Console\Shell;
@@ -9,3 +10,4 @@ class HelloShell extends Shell
         $this->out('Hello world.');
     }
 }
+?>
