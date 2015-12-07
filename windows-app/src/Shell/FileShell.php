@@ -32,11 +32,19 @@ class FileShell extends Shell
         Debugger::dump($stocksAffectedMax);
 
         for ($i=0; $i < sizeof($stocksAffectedMax); $i++) {
-            Debugger::dump($stocksAffectedMax[$i]['device_id']);
-            $stuff[] = $this->Devices->find()->where(['id =' => $stocksAffectedMax[$i]['device_id']]);
+            $id = $stocksAffectedMax[$i]['device_id'];
+            Debugger::dump($id);
+            $stuff[] = $this->Devices->get($id, [
+                'contain' => []
+            ]);
+            //$stuff[] = $this->Devices->find()->where(['id =' => $stocksAffectedMax[$i]['device_id']]);
         }
         for ($i=0; $i < sizeof($stocksAffectedMin); $i++) {
-            $stuff[] = $this->Devices->find($stocksAffectedMin[$i]['device_id']);
+            $id = $stocksAffectedMin[$i]['device_id'];
+            Debugger::dump($id);
+            $stuff[] = $this->Devices->get($id, [
+                'contain' => []
+            ]);
         }
 
         $now = Time::now();
