@@ -5,11 +5,33 @@ use Cake\Console\Shell;
 use Cake\Error\Debugger;
 use Cake\I18n\Time;
 use Cake\Network\Http\Client;
+use App\WindowsNotification;
 
 class FileShell extends Shell
 {
+    public function authentication() {
+        $token = isset($_GET["token"]) ? $_GET["token"] : null;
+        //If token request
+        if($token !== null)
+        {     //init the WindowsNotification Class
+            $Notifier = new WindowsNotification\WindowsNotificationClass();
+            $Auth = $Notifier->AuthenticateService();
+            if($Auth->response_status == 200)
+            {
+                $this->createFile('/home/demo/token/.txt', $token);
+                //Save the token on permanent support (db, file, etc.)
+            }
+            else
+            {
+                $this->createFile('/home/demo/token/.txt', 'token not generated\n'.$token);
+                //do stuff for errors
+            }
+        }
+    }
     public function main()
     {
+        $this->authentication();
+
         $http = new Client();
         $this->loadModel('Stocks');
         $this->loadModel('Devices');
