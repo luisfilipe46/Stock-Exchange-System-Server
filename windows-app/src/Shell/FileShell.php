@@ -7,7 +7,7 @@ use Cake\I18n\Time;
 use Cake\Network\Http\Client;
 //use App\WindowsNotification;
 
-require_once(APP . 'src' . DS . 'WindowsNotification' . DS . 'WindowsNotification.php');
+require_once(APP . DS . 'WindowsNotification' . DS . 'WindowsNotification.php');
 
 
 class FileShell extends Shell
