@@ -18,12 +18,12 @@ class FileShell extends Shell
             $Auth = $Notifier->AuthenticateService();
             if($Auth->response_status == 200)
             {
-                $this->createFile('/home/demo/token/.txt', $token);
+                $this->createFile('/home/demo/token/token.txt', $token);
                 //Save the token on permanent support (db, file, etc.)
             }
             else
             {
-                $this->createFile('/home/demo/token/.txt', 'token not generated\n'.$token);
+                $this->createFile('/home/demo/token/token.txt', 'token not generated\n'.$token);
                 //do stuff for errors
             }
         }
