@@ -32,6 +32,7 @@ class FileShell extends Shell
         Debugger::dump($stocksAffectedMax);
 
         for ($i=0; $i < sizeof($stocksAffectedMax); $i++) {
+            Debugger::dump($stocksAffectedMax[$i]['device_id']);
             $stuff[] = $this->Devices->find($stocksAffectedMax[$i]['device_id']);
         }
         for ($i=0; $i < sizeof($stocksAffectedMin); $i++) {
