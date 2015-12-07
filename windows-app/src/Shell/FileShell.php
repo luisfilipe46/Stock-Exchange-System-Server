@@ -14,9 +14,8 @@ class FileShell extends Shell
         $this->loadModel('Stocks');
         $tick_names = $this->Stocks->find()->distinct(['tick_name'])->toArray();
         for ($i = 0; $i < sizeof($tick_names); $i++) {
-            $response = $http->get('http://finance.yahoo.com/d/quotes?f=sl1d1t1v&s='.$tick_names[$i]['tick_name']);
-            Debugger::dump($response);
-            $responses[] = $response.'\n';
+            $response = $http->get('http://download.finance.yahoo.com/d/quotes?f=sl1d1t1v&s='.$tick_names[$i]['tick_name']);
+            $responses[] = $response->body();
         }
 
         $stuff = implode(",",$responses);;
