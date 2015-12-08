@@ -55,11 +55,8 @@ class StocksController extends AppController
             $channelURI = $this->request->data('channelURI');
             $wp_id = $this->request->data('windowsPhoneID');
             $this->loadModel('Devices');
-            Debugger::dump(111111111111111111);
             $device = $this->Devices->find()->where(['wp_id =' => $wp_id])->toArray();
-            Debugger::dump(222222222222222222);
             $devicesTable = TableRegistry::get('Devices');
-            Debugger::dump(333333333333333333);
 
             if (empty($device))
             {
@@ -74,12 +71,10 @@ class StocksController extends AppController
             }
             else {
                 $device_id = $device[0]['id'];
-                $device = $devicesTable->get($device_id); // Return article with id 12
+                $device = $devicesTable->get($device_id);
                 $device->name = $channelURI;
                 $device->save($device);
             }
-
-            Debugger::dump(44444444444444444444);
 
             $data['minimum'] = $this->request->data('min');
             $data['maximum'] = $this->request->data('max');
@@ -99,8 +94,8 @@ class StocksController extends AppController
             $this->set(compact('stock', 'devices'));
             $this->set('_serialize', ['stock']);
             */
-            $this->set(compact());
-            $this->set('_serialize', []);
+            $this->set(compact(''));
+            $this->set('_serialize', ['']);
 
         }
     }
@@ -149,7 +144,7 @@ class StocksController extends AppController
         }
         //return $this->redirect(['action' => 'index']);
 
-        $this->set(compact());
-        $this->set('_serialize', []);
+        $this->set(compact(''));
+        $this->set('_serialize', ['']);
     }
 }
