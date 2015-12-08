@@ -55,7 +55,7 @@ class StocksController extends AppController
             $wp_id = $this->request->data('windowsPhoneID');
             $this->loadModel('Devices');
             $devicesTable = TableRegistry::get('Devices');
-            $device = $this->Devices->find()->where(['windowsPhoneID =' => $wp_id])->toArray();
+            $device = $this->Devices->find()->where(['wp_id =' => $wp_id])->toArray();
             if (empty($device))
             {
                 $device = $devicesTable->newEntity();
