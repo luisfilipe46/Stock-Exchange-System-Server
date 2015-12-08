@@ -21,6 +21,7 @@ $data = [
 			'created' => '2016-06-06 01:00:00',
 			'modified' => '2016-06-06 01:00:00'
 		],
+/*
 		[
 			'name' => 'windows 10',
 		],
@@ -33,6 +34,7 @@ $data = [
 		[
 			'name' => 'windows 10.3',
 		],
+*/
 	],
 	'stocks' => [
 		'_truncate' => true,
@@ -46,6 +48,7 @@ $data = [
 			'created' => '2016-06-06 01:00:00',
 			'modified' => '2016-06-06 01:00:00'
 		],
+/*
 		[
 			'device_id' => 1,
 			'tick_name' => 'GOOG',
@@ -70,6 +73,7 @@ $data = [
 			'minimum' => 850.6,
 			'maximum' => 1520.9,
 		],
+*/
 	],
 ];
 
