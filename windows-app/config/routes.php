@@ -42,6 +42,8 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function ($routes) {
+    $routes->extensions(['json', 'xml']);
+
 
     $routes->connect('/stocks',
         ['controller' => 'Stocks', 'action' => 'add', '_method' => 'POST']
