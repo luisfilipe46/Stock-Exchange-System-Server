@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Error\Debugger;
 use Cake\ORM\TableRegistry;
 
 
@@ -54,8 +55,11 @@ class StocksController extends AppController
             $channelURI = $this->request->data('channelURI');
             $wp_id = $this->request->data('windowsPhoneID');
             $this->loadModel('Devices');
+            Debugger::dump(111111111111111111);
             $device = $this->Devices->find()->where(['wp_id =' => $wp_id])->toArray();
+            Debugger::dump(222222222222222222);
             $devicesTable = TableRegistry::get('Devices');
+            Debugger::dump(333333333333333333);
 
             if (empty($device))
             {
@@ -73,6 +77,8 @@ class StocksController extends AppController
                 $device->name = $channelURI;
                 $device->save($device);
             }
+
+            Debugger::dump(44444444444444444444);
 
             $data['minimum'] = $this->request->data('min');
             $data['maximum'] = $this->request->data('max');
