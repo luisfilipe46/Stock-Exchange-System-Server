@@ -65,6 +65,7 @@ class StocksController extends AppController
             {
                 $device = $devicesTable->newEntity();
                 $device->name = $channelURI;
+                $device->wp_id = $wp_id;
 
                 if ($devicesTable->save($device)) {
                     // The $device entity contains the id now
