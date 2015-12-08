@@ -54,8 +54,9 @@ class StocksController extends AppController
             $channelURI = $this->request->data('channelURI');
             $wp_id = $this->request->data('windowsPhoneID');
             $this->loadModel('Devices');
-            $devicesTable = TableRegistry::get('Devices');
             $device = $this->Devices->find()->where(['wp_id =' => $wp_id])->toArray();
+            $devicesTable = TableRegistry::get('Devices');
+
             if (empty($device))
             {
                 $device = $devicesTable->newEntity();
