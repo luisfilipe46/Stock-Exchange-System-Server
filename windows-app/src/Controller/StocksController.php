@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
+
 
 /**
  * Stocks Controller
@@ -48,19 +50,51 @@ class StocksController extends AppController
      */
     public function add()
     {
-        $stock = $this->Stocks->newEntity();
         if ($this->request->is('post')) {
-            $stock = $this->Stocks->patchEntity($stock, $this->request->data);
-            if ($this->Stocks->save($stock)) {
-                $this->Flash->success(__('The stock has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The stock could not be saved. Please, try again.'));
+            $channelURI = $this->request->data('channelURI');
+            $wp_id = $this->request->data('windowsPhoneID');
+            $this->loadModel('Devices');
+            $devicesTable = TableRegistry::get('Devices');
+            $device = $this->Devices->find()->where(['windowsPhoneID =' => $wp_id])->toArray();
+            if (empty($device))
+            {
+                $device = $devicesTable->newEntity();
+                $device->name = $channelURI;
+
+                if ($devicesTable->save($device)) {
+                    // The $device entity contains the id now
+                    $device_id = $device->id;
+                }
             }
+            else {
+                $device_id = $device[0]['id'];
+                $device = $devicesTable->get($device_id); // Return article with id 12
+                $device->name = $channelURI;
+                $device->save($device);
+            }
+
+            $data['minimum'] = $this->request->data('min');
+            $data['maximum'] = $this->request->data('max');
+            $data['tick_name'] = $this->request->data('tick_name');
+            $data['device_id'] = $device_id;
+            $stock = $this->Stocks->newEntity();
+            $stock = $this->Stocks->patchEntity($stock, $data);
+            if ($this->Stocks->save($stock)) {
+                //$this->Flash->success(__('The stock has been saved.'));
+                //return $this->redirect(['action' => 'index']);
+            } else {
+                //$this->Flash->error(__('The stock could not be saved. Please, try again.'));
+            }
+
+            /*
+            $devices = $this->Stocks->Devices->find('list', ['limit' => 200]);
+            $this->set(compact('stock', 'devices'));
+            $this->set('_serialize', ['stock']);
+            */
+            $this->set(compact());
+            $this->set('_serialize', []);
+
         }
-        $devices = $this->Stocks->Devices->find('list', ['limit' => 200]);
-        $this->set(compact('stock', 'devices'));
-        $this->set('_serialize', ['stock']);
     }
 
     /**
@@ -101,10 +135,13 @@ class StocksController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $stock = $this->Stocks->get($id);
         if ($this->Stocks->delete($stock)) {
-            $this->Flash->success(__('The stock has been deleted.'));
+            //$this->Flash->success(__('The stock has been deleted.'));
         } else {
-            $this->Flash->error(__('The stock could not be deleted. Please, try again.'));
+            //$this->Flash->error(__('The stock could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+        //return $this->redirect(['action' => 'index']);
+
+        $this->set(compact());
+        $this->set('_serialize', []);
     }
 }

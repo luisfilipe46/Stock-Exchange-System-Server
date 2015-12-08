@@ -42,6 +42,13 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function ($routes) {
+
+    $routes->connect('/stocks',
+        ['controller' => 'Stocks', 'action' => 'add', '_method' => 'POST']
+    );
+    $routes->connect('/stocks',
+        ['controller' => 'Stocks', 'action' => 'delete', '_method' => 'DELETE']
+    );
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
      * its action called 'display', and we pass a param to select the view file
