@@ -73,7 +73,7 @@ class StocksController extends AppController
                 $device_id = $device[0]['id'];
                 $device = $devicesTable->get($device_id);
                 $device->name = $channelURI;
-                $device->save($device);
+                $devicesTable->save($device);
             }
 
             $data['minimum'] = $this->request->data('min');
