@@ -52,29 +52,7 @@ class StocksController extends AppController
     public function add()
     {
         if ($this->request->is('post')) {
-            $channelURI = $this->request->data('channelURI');
-            $wp_id = $this->request->data('windowsPhoneID');
-            $this->loadModel('Devices');
-            $device = $this->Devices->find()->where(['wp_id =' => $wp_id])->toArray();
-            $devicesTable = TableRegistry::get('Devices');
-
-            if (empty($device))
-            {
-                $device = $devicesTable->newEntity();
-                $device->name = $channelURI;
-                $device->wp_id = $wp_id;
-
-                if ($devicesTable->save($device)) {
-                    // The $device entity contains the id now
-                    $device_id = $device->id;
-                }
-            }
-            else {
-                $device_id = $device[0]['id'];
-                $device = $devicesTable->get($device_id);
-                $device->name = $channelURI;
-                $devicesTable->save($device);
-            }
+            $this->insertOrUpdateDevicesTable($device_id);
 
             $data['minimum'] = $this->request->data('min');
             $data['maximum'] = $this->request->data('max');
@@ -83,20 +61,11 @@ class StocksController extends AppController
             $stock = $this->Stocks->newEntity();
             $stock = $this->Stocks->patchEntity($stock, $data);
             if ($this->Stocks->save($stock)) {
-                //$this->Flash->success(__('The stock has been saved.'));
-                //return $this->redirect(['action' => 'index']);
             } else {
-                //$this->Flash->error(__('The stock could not be saved. Please, try again.'));
             }
 
-            /*
-            $devices = $this->Stocks->Devices->find('list', ['limit' => 200]);
-            $this->set(compact('stock', 'devices'));
-            $this->set('_serialize', ['stock']);
-            */
             $this->set(compact(''));
             $this->set('_serialize', ['']);
-
         }
     }
 
@@ -135,16 +104,45 @@ class StocksController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $stock = $this->Stocks->get($id);
-        if ($this->Stocks->delete($stock)) {
-            //$this->Flash->success(__('The stock has been deleted.'));
-        } else {
-            //$this->Flash->error(__('The stock could not be deleted. Please, try again.'));
-        }
-        //return $this->redirect(['action' => 'index']);
+        if ($this->request->is('delete')) {
+            $this->insertOrUpdateDevicesTable($device_id);
+            $stocks_table = TableRegistry::get('Stocks');
 
-        $this->set(compact(''));
-        $this->set('_serialize', ['']);
+            $stocks_table->deleteAll([
+                'device_id =' => $device_id,
+                'tick_name =' => $this->request->data('tick_name')
+            ]);
+
+            $this->set(compact(''));
+            $this->set('_serialize', ['']);
+        }
+    }
+
+    /**
+     * @param $device_id
+     */
+    private function insertOrUpdateDevicesTable(&$device_id)
+    {
+        $channelURI = $this->request->data('channelURI');
+        $wp_id = $this->request->data('windowsPhoneID');
+        $this->loadModel('Devices');
+        $device = $this->Devices->find()->where(['wp_id =' => $wp_id])->toArray();
+        $devicesTable = TableRegistry::get('Devices');
+
+        if (empty($device)) {
+            $device = $devicesTable->newEntity();
+            $device->name = $channelURI;
+            $device->wp_id = $wp_id;
+
+            if ($devicesTable->save($device)) {
+                // The $device entity contains the id now
+                $device_id = $device->id;
+            }
+        } else {
+            $device_id = $device[0]['id'];
+            $device = $devicesTable->get($device_id);
+            $device->name = $channelURI;
+            $devicesTable->save($device);
+        }
     }
 }
