@@ -162,7 +162,8 @@ class FileShell extends Shell
                 'contain' => []
             ]);
             $channelURI = $device['name'];
-            $Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMin[$i]['tick_name'] . " atingiu mínimo!"));
+            $responseToSendMsg = $Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMin[$i]['tick_name'] . " atingiu mínimo!"));
+            Debugger::dump($responseToSendMsg);
         }
     }
 }
