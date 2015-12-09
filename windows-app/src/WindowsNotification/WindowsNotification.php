@@ -20,14 +20,16 @@ namespace App\WindowsNotification
          * @see https://msdn.microsoft.com/en-us/library/windows/apps/hh465407.aspx
          * @var string
          */
-        private static $SID = "ms-app://s-1-15-2-3499647505-2755797929-4128354218-2078134981-2066966101-1990600995-916844598";
+        //private static $SID = "ms-app://s-1-15-2-3499647505-2755797929-4128354218-2078134981-2066966101-1990600995-916844598";
+        private static $SID = "ms-app://s-1-15-2-3394218596-1193785435-2244223284-347101412-150494363-1012164021-3562992840";
 
         /**
          * Secret token for WNS OAuth authentication
          * @see https://msdn.microsoft.com/en-us/library/windows/apps/hh465407.aspx
          * @var string
          */
-        private static $ClientSecret = "G+Eu7i0l+w881MOXHhNaMZBUQ/tx+mkd";
+        //private static $ClientSecret = "G+Eu7i0l+w881MOXHhNaMZBUQ/tx+mkd";
+        private static $ClientSecret = "scZG2aFPMfffny+d71Y3whywkJXgxyLK";
 
         /**
          * Link for WNS authentication
