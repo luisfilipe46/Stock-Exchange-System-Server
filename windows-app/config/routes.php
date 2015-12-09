@@ -48,8 +48,8 @@ Router::scope('/', function ($routes) {
     $routes->connect('/stocks',
         ['controller' => 'Stocks', 'action' => 'add', '_method' => 'POST']
     );
-    $routes->connect('/stocks',
-        ['controller' => 'Stocks', 'action' => 'delete', '_method' => 'DELETE']
+    $routes->connect('/deletestocks',
+        ['controller' => 'Stocks', 'action' => 'delete', '_method' => 'POST']
     );
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',

@@ -104,7 +104,7 @@ class StocksController extends AppController
      */
     public function delete($id = null)
     {
-        if ($this->request->is('delete')) {
+        if ($this->request->is('post')) {
             $this->insertOrUpdateDevicesTable($device_id);
             $stocks_table = TableRegistry::get('Stocks');
 
