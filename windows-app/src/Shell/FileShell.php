@@ -46,6 +46,7 @@ class FileShell extends Shell
     }
     public function main()
     {
+        $tick_names_and_values = array();
         $this->authentication();
 
         $http = new Client();
