@@ -137,6 +137,8 @@ class FileShell extends Shell
      */
     private function checkMinMaxValuesAndSendToastNotifications($Notifier, $tick_names_and_values)
     {
+        $stocksAffectedMax=array();
+        $stocksAffectedMin=array();
 
         for ($i = 0; $i < sizeof($tick_names_and_values); $i++) {
             $stocksAffectedMax = $this->Stocks->find()->where(['maximum <=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
