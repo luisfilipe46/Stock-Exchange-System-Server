@@ -5,6 +5,7 @@ use Cake\Console\Shell;
 use Cake\Error\Debugger;
 //use Cake\I18n\Time;
 use Cake\Network\Http\Client;
+use Cake\Filesystem\File;
 use App\WindowsNotification\WindowsNotificationClass;
 //use App\WindowsNotification;
 
