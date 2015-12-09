@@ -7,6 +7,18 @@ use Cake\Error\Debugger;
 use Cake\Network\Http\Client;
 use Cake\Filesystem\File;
 use App\WindowsNotification\WindowsNotificationClass;
+use App\WindowsNotification\WNSNotificationOptions;
+use App\WindowsNotification\HTTPMethod;
+use App\WindowsNotification\Content_Type;
+use App\WindowsNotification\X_WNS_Type;
+use App\WindowsNotification\X_WNS_Cache_Policy;
+use App\WindowsNotification\X_WNS_RequestForStatus;
+use App\WindowsNotification\X_WNS_SuppressPopup;
+use App\WindowsNotification\X_WNS_Match;
+use App\WindowsNotification\OAuthObject;
+use App\WindowsNotification\TemplateToast;
+use App\WindowsNotification\TemplateBadge;
+
 //use App\WindowsNotification;
 
 require_once(APP . DS . 'WindowsNotification' . DS . 'WindowsNotification.php');
