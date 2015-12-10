@@ -114,7 +114,7 @@ class FileShell extends Shell
             $channelURI = $device['name'];
 
             $MyTileXML1 = '<tile><visual version="2"><binding template="TileSquare150x150Text01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
-            $MyTileXML1 = '<tile><visual version="2"><binding template="TileWide310x150BlockAndText01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
+            $MyTileXML2 = '<tile><visual version="2"><binding template="TileWide310x150BlockAndText01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
 /*<visual version="2"><binding template="TileWide310x150BlockAndText01" fallback="TileSquareText01"><text id="1">\'.$tick_name.\'</text><text id="2">\'.$value.\'</text></binding></visual>
 </tile>';
             /*$MyTileXML = '<tile>
