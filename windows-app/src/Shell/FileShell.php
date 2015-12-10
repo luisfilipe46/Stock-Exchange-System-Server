@@ -85,8 +85,8 @@ class FileShell extends Shell
         Debugger::dump('tick_names_and_values: ');
         Debugger::dump($tick_names_and_values);
 
-        //$this->sendAllStocksNotificationsInTileNotifications($NotifierToast, $tick_names_and_values, $allStocks);
-        $this->checkMinMaxValuesAndSendToastNotifications($NotifierTile, $tick_names_and_values);
+        $this->sendAllStocksNotificationsInTileNotifications($NotifierToast, $tick_names_and_values, $allStocks);
+        //$this->checkMinMaxValuesAndSendToastNotifications($NotifierTile, $tick_names_and_values);
 
         //$stuff = implode(",", $stuff);
         //$now = Time::now();
@@ -129,7 +129,8 @@ class FileShell extends Shell
     </binding>
   </visual>
 </tile>';
-            $Notifier->Send($channelURI,$MyTileXML);
+            $responseToSendMsg = $Notifier->Send($channelURI,$MyTileXML);
+            Debugger::dump($responseToSendMsg);
         }
 
     }
