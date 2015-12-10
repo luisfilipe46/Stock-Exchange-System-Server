@@ -116,7 +116,7 @@ class FileShell extends Shell
         Debugger::dump('tick_names_and_values: ');
         Debugger::dump($tick_names_and_values);
 
-        $this->sendAllStocksNotificationsInTileNotifications($NotifierTile, $tick_names_and_values, $allStocks);
+        $this->sendAllStocksNotificationsInTileNotifications($NotifierTile, $tick_names_and_values, $allStocksByDeviceId);
         $this->checkMinMaxValuesAndSendToastNotifications($NotifierToast, $tick_names_and_values);
 
         //$stuff = implode(",", $stuff);
@@ -128,7 +128,7 @@ class FileShell extends Shell
      * @param $http
      * @param $Notifier
      */
-    private function sendAllStocksNotificationsInTileNotifications($Notifier, $tick_names_and_values, $allStocks)
+    /*private function sendAllStocksNotificationsInTileNotifications($Notifier, $tick_names_and_values, $allStocks)
     {
 
         for ($i = 0; $i < sizeof($allStocks); $i++) {
@@ -151,6 +151,77 @@ class FileShell extends Shell
             Debugger::dump($responseToSendMsg1);
             $responseToSendMsg2 = $Notifier->Send($channelURI,$MyTileXML2);
             Debugger::dump($responseToSendMsg2);
+        }
+
+    }*/
+
+    private function sendAllStocksNotificationsInTileNotifications($Notifier, $tick_names_and_values, $allStocksByDeviceId)
+    {
+
+        for ($i = 0; $i < sizeof($allStocksByDeviceId); $i++) {
+            $id = $allStocksByDeviceId[$i]['device_id'];
+
+            $device = $this->Devices->get($id, [
+                'contain' => []
+            ]);
+            $channelURI = $device['name'];
+
+
+            $MyTileXML1 = '<tile><visual version="2"><binding template="TileSquare150x150Text03" fallback="TileSquareText01">';
+            $MyTileXML2 = '<tile><visual version="2"><binding template="TileWide310x150Text05" fallback="TileSquareText01">';
+
+            $stocksAtualDeviceId = $allStocksByDeviceId[$i]['stocks'];
+
+            for ($a = 0; $a < sizeof($stocksAtualDeviceId); $a++) {
+                $textId = $a+1;
+                $tick_name = $stocksAtualDeviceId[$a]['tick_name'];
+                $value = 0.0;
+
+                for ($aaa = 0; $aaa < sizeof($tick_names_and_values); $aaa++)
+                {
+                    if ($tick_names_and_values[$a][0] == $tick_name)
+                        $value = $tick_names_and_values[$a][1];
+                }
+
+                $MyTileXML1 = $MyTileXML1.'<text id="'.($textId).'">'.$tick_name.': '.$value.'</text>';
+                $MyTileXML2 = $MyTileXML2.'<text id="'.($textId).'">'.$tick_name.': '.$value.'</text>';
+
+            }
+
+            $MyTileXML1 = $MyTileXML1.'</binding></visual></tile>';
+            $MyTileXML2 = $MyTileXML2.'</binding></visual></tile>';
+
+            Debugger::dump('MyTileXML1: ');
+            Debugger::dump($MyTileXML1);
+
+            Debugger::dump('MyTileXML2: ');
+            Debugger::dump($MyTileXML2);
+
+
+            $responseToSendMsg1 = $Notifier->Send($channelURI,$MyTileXML1);
+            Debugger::dump($responseToSendMsg1);
+            $responseToSendMsg2 = $Notifier->Send($channelURI,$MyTileXML2);
+            Debugger::dump($responseToSendMsg2);
+            /*
+            $tick_name = $allStocks[$i]['tick_name'];
+            $value = 0.0;
+            for ($a=0; $a < sizeof($tick_names_and_values); $a++) {
+                if ($tick_names_and_values[$a][0] == $tick_name)
+                    $value = $tick_names_and_values[$a][1];
+            }
+            $device = $this->Devices->get($id, [
+                'contain' => []
+            ]);
+            $channelURI = $device['name'];
+
+            $MyTileXML1 = '<tile><visual version="2"><binding template="TileSquare150x150Text03" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
+            $MyTileXML2 = '<tile><visual version="2"><binding template="TileWide310x150Text05" fallback="TileSquareText01"><text id="1">'.$tick_name.': '.$value.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
+
+            $responseToSendMsg1 = $Notifier->Send($channelURI,$MyTileXML1);
+            Debugger::dump($responseToSendMsg1);
+            $responseToSendMsg2 = $Notifier->Send($channelURI,$MyTileXML2);
+            Debugger::dump($responseToSendMsg2);
+            */
         }
 
     }
