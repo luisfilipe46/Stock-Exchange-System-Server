@@ -75,7 +75,8 @@ class FileShell extends Shell
 
 
         //$allStocks = $this->Stocks->find('all')->toArray();
-        $allStocks = $this->Stocks->find('all')->group(['Stocks.device_id'])->toArray();
+        //$allStocks = $this->Stocks->find('all')->group(['Stocks.device_id'])->toArray();
+        $allStocks = $this->Stocks->Devices->find()->group(['device_id'])->toArray();
         Debugger::dump('allStocks: ');
         Debugger::dump($allStocks);
 
@@ -117,8 +118,8 @@ class FileShell extends Shell
             ]);
             $channelURI = $device['name'];
 
-            $MyTileXML1 = '<tile><visual version="2"><binding template="TileSquare150x150Text01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
-            $MyTileXML2 = '<tile><visual version="2"><binding template="TileWide310x150BlockAndText01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
+            $MyTileXML1 = '<tile><visual version="2"><binding template="TileSquare150x150Text03" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
+            $MyTileXML2 = '<tile><visual version="2"><binding template="TileWide310x150Text05" fallback="TileSquareText01"><text id="1">'.$tick_name.': '.$value.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
 
             $responseToSendMsg1 = $Notifier->Send($channelURI,$MyTileXML1);
             Debugger::dump($responseToSendMsg1);
