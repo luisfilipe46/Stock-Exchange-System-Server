@@ -76,7 +76,7 @@ class FileShell extends Shell
 
         //$allStocks = $this->Stocks->find('all')->toArray();
         //$allStocks = $this->Stocks->find('all')->group(['Stocks.device_id'])->toArray();
-        $allStocks = $this->Stocks->Devices->find()->group(['device_id'])->toArray();
+        $allStocks = $this->Stocks->Devices->find()->group(['Devices.id'])->toArray();
         Debugger::dump('allStocks: ');
         Debugger::dump($allStocks);
 
