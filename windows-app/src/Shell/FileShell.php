@@ -170,8 +170,8 @@ class FileShell extends Shell
 
                 $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu máximo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
                 //$Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMax[$i]['tick_name'] . " atingiu máximo!"));
-                //Debugger::dump('$i: '.$i);
-                //Debugger::dump($responseToSendMsg);
+                Debugger::dump('$i: '.$i);
+                Debugger::dump($responseToSendMsg);
             }
         }
 
@@ -187,8 +187,8 @@ class FileShell extends Shell
                 $channelURI = $device['name'];
                 //$responseToSendMsg = $Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMin[$i]['tick_name'] . " atingiu mínimo!"));
                 $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu mínimo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
-                //Debugger::dump('$i: '.$i);
-                //Debugger::dump($responseToSendMsg);
+                Debugger::dump('$i: '.$i);
+                Debugger::dump($responseToSendMsg);
             }
         }
     }
