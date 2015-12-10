@@ -187,7 +187,7 @@ class FileShell extends Shell
 
             //$MyToastXML = '<toast><visual><binding template="ToastText02"><text id="1">'.$stocksAffectedMin[$i]['tick_name'].' atingiu mínimo'.'</text><text id="2">VALOR</text></binding></visual></toast>';
             //$responseToSendMsg = $Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMin[$i]['tick_name'] . " atingiu mínimo!"));
-            $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu mínimo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
+            $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMin[$i]['tick_name']." atingiu mínimo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
             //$responseToSendMsg = $Notifier->Send($channelURI,$MyToastXML);
             Debugger::dump($responseToSendMsg);
         }
