@@ -82,6 +82,7 @@ class FileShell extends Shell
             $tick_names_and_values[] = [str_replace("\"", "", $tick_name), explode(",", $response->body())[1]];
         }
 
+        Debugger::dump("$tick_names_and_values: ");
         Debugger::dump($tick_names_and_values);
 
         //$this->sendAllStocksNotificationsInTileNotifications($NotifierToast, $tick_names_and_values, $allStocks);
@@ -147,12 +148,15 @@ class FileShell extends Shell
             $stocksAffectedMin = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
         }
 
+        Debugger::dump("$stocksAffectedMax: ");
         Debugger::dump($stocksAffectedMax);
+        Debugger::dump("$stocksAffectedMin: ");
         Debugger::dump($stocksAffectedMin);
 
         for ($i = 0; $i < sizeof($stocksAffectedMax); $i++) {
             if (!empty($stocksAffectedMax[$i]))
             {
+                Debugger::dump("$stocksAffectedMax[".$i."]");
                 Debugger::dump($stocksAffectedMax[$i]);
                 $id = $stocksAffectedMax[$i]['device_id'];
                 $device = $this->Devices->get($id, [
@@ -170,6 +174,7 @@ class FileShell extends Shell
         for ($i = 0; $i < sizeof($stocksAffectedMin); $i++) {
             if (!empty($stocksAffectedMin[$i]))
             {
+                Debugger::dump("$stocksAffectedMin[".$i."]");
                 Debugger::dump($stocksAffectedMin[$i]);
                 $id = $stocksAffectedMin[$i]['device_id'];
                 $device = $this->Devices->get($id, [
