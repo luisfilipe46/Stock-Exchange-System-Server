@@ -82,6 +82,8 @@ class FileShell extends Shell
             $tick_names_and_values[] = [str_replace("\"", "", $tick_name), explode(",", $response->body())[1]];
         }
 
+        Debugger::dump($tick_names_and_values);
+
         //$this->sendAllStocksNotificationsInTileNotifications($NotifierToast, $tick_names_and_values, $allStocks);
         $this->checkMinMaxValuesAndSendToastNotifications($NotifierTile, $tick_names_and_values);
 
