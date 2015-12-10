@@ -144,8 +144,12 @@ class FileShell extends Shell
         $stocksAffectedMin=array();
 
         for ($i = 0; $i < sizeof($tick_names_and_values); $i++) {
-            $stocksAffectedMax = $this->Stocks->find()->where(['maximum <=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
-            $stocksAffectedMin = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
+            $stockAffectedMax = $this->Stocks->find()->where(['maximum <=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
+            $stockAffectedMin = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
+            for ($a = 0; $a < sizeof($stockAffectedMax); $a++)
+                $stocksAffectedMax[] = $stockAffectedMax[$a];
+            for ($a = 0; $a < sizeof($stockAffectedMin); $a++)
+                $stocksAffectedMin[] = $stockAffectedMin[$a];
         }
 
         Debugger::dump('stocksAffectedMax: ');
