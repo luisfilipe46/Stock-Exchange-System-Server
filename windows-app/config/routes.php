@@ -51,6 +51,9 @@ Router::scope('/', function ($routes) {
     $routes->connect('/deletestocks',
         ['controller' => 'Stocks', 'action' => 'delete', '_method' => 'POST']
     );
+    $routes->connect('/updatechannel',
+        ['controller' => 'Stocks', 'action' => 'insertorupdatechannel', '_method' => 'POST']
+    );
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
      * its action called 'display', and we pass a param to select the view file

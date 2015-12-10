@@ -53,15 +53,28 @@ class StocksController extends AppController
     {
         if ($this->request->is('post')) {
             $this->insertOrUpdateDevicesTable($device_id);
+            $tick_name = $this->request->data('tick_name');
+            $stock = $this->Stocks->find()->where(['device_id =' => $device_id, 'tick_name =' => $tick_name])->toArray();
+            $stocksTable = TableRegistry::get('Stocks');
 
-            $data['minimum'] = $this->request->data('min');
-            $data['maximum'] = $this->request->data('max');
-            $data['tick_name'] = $this->request->data('tick_name');
-            $data['device_id'] = $device_id;
-            $stock = $this->Stocks->newEntity();
-            $stock = $this->Stocks->patchEntity($stock, $data);
-            if ($this->Stocks->save($stock)) {
-            } else {
+            if (empty($stock)) {
+
+                $data['minimum'] = $this->request->data('min');
+                $data['maximum'] = $this->request->data('max');
+                $data['tick_name'] = $this->request->data('tick_name');
+                $data['device_id'] = $device_id;
+                $stock = $this->Stocks->newEntity();
+                $stock = $this->Stocks->patchEntity($stock, $data);
+                $this->Stocks->save($stock);
+                //if ($this->Stocks->save($stock)) {} else {}
+            }
+            else {
+
+                $stock_id = $stock[0]['id'];
+                $stock = $stocksTable->get($stock_id);
+                $stock->minimum = $this->request->data('min');
+                $stock->maximum = $this->request->data('max');
+                $stocksTable->save($stock);
             }
 
             $this->set(compact(''));
@@ -115,6 +128,12 @@ class StocksController extends AppController
 
             $this->set(compact(''));
             $this->set('_serialize', ['']);
+        }
+    }
+
+    public function insertorupdatechannel() {
+        if($this->request->is('post')) {
+            $this->insertOrUpdateDevicesTable($device_id);
         }
     }
 
