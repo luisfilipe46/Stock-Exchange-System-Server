@@ -158,8 +158,8 @@ class FileShell extends Shell
         Debugger::dump($stocksAffectedMin);
 
         for ($i = 0; $i < sizeof($stocksAffectedMax); $i++) {
-            if (!empty($stocksAffectedMax[$i]))
-            {
+            //if (!empty($stocksAffectedMax[$i]))
+            //{
                 Debugger::dump('$stocksAffectedMax['.$i.']');
                 Debugger::dump($stocksAffectedMax[$i]);
                 $id = $stocksAffectedMax[$i]['device_id'];
@@ -170,14 +170,13 @@ class FileShell extends Shell
 
                 $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu máximo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
                 //$Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMax[$i]['tick_name'] . " atingiu máximo!"));
-                Debugger::dump('$i: '.$i);
                 Debugger::dump($responseToSendMsg);
-            }
+            //}
         }
 
         for ($i = 0; $i < sizeof($stocksAffectedMin); $i++) {
-            if (!empty($stocksAffectedMin[$i]))
-            {
+           // if (!empty($stocksAffectedMin[$i]))
+            //{
                 Debugger::dump('$stocksAffectedMin['.$i.']');
                 Debugger::dump($stocksAffectedMin[$i]);
                 $id = $stocksAffectedMin[$i]['device_id'];
@@ -187,9 +186,8 @@ class FileShell extends Shell
                 $channelURI = $device['name'];
                 //$responseToSendMsg = $Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMin[$i]['tick_name'] . " atingiu mínimo!"));
                 $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu mínimo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
-                Debugger::dump('$i: '.$i);
                 Debugger::dump($responseToSendMsg);
-            }
+            //}
         }
     }
 }
