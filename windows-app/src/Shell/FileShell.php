@@ -113,9 +113,9 @@ class FileShell extends Shell
             ]);
             $channelURI = $device['name'];
 
-            $MyTileXML = '<tile>
-<visual version="2"><binding template="TileSquare150x150Text01" fallback="TileSquareText01"><text id="1">\'.$tick_name.\'</text><text id="2">\'.$value.\'</text></binding></visual>
-<visual version="2"><binding template="TileWide310x150BlockAndText01" fallback="TileSquareText01"><text id="1">\'.$tick_name.\'</text><text id="2">\'.$value.\'</text></binding></visual>
+            $MyTileXML1 = '<tile><visual version="2"><binding template="TileSquare150x150Text01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
+            $MyTileXML1 = '<tile><visual version="2"><binding template="TileWide310x150BlockAndText01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
+/*<visual version="2"><binding template="TileWide310x150BlockAndText01" fallback="TileSquareText01"><text id="1">\'.$tick_name.\'</text><text id="2">\'.$value.\'</text></binding></visual>
 </tile>';
             /*$MyTileXML = '<tile>
   <visual>
@@ -134,8 +134,10 @@ class FileShell extends Shell
     </binding>
   </visual>
 </tile>';*/
-            $responseToSendMsg = $Notifier->Send($channelURI,$MyTileXML);
-            Debugger::dump($responseToSendMsg);
+            $responseToSendMsg1 = $Notifier->Send($channelURI,$MyTileXML1);
+            Debugger::dump($responseToSendMsg1);
+            $responseToSendMsg2 = $Notifier->Send($channelURI,$MyTileXML2);
+            Debugger::dump($responseToSendMsg2);
         }
 
     }
