@@ -59,10 +59,10 @@ class FileShell extends Shell
         $token_file->close();
 
         $MyAuthObject = new OAuthObject(array("token_type"=>"Bearer", "access_token" => $token));
+
         $OptionsToast = new WNSNotificationOptions();
         $OptionsToast->SetAuthorization($MyAuthObject);
         $OptionsToast->SetX_WNS_REQUESTFORSTATUS(X_WNS_RequestForStatus::Request);
-
         $NotifierToast = new WindowsNotificationClass($OptionsToast);
 
         $OptionsTile = new WNSNotificationOptions();
@@ -113,12 +113,12 @@ class FileShell extends Shell
             ]);
             $channelURI = $device['name'];
 
-            $MyTileXML = '<tile><visual version="2"><binding template="TileSquare150x150Text01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
-            /*$MyTileXML = '<tile>
+            //$MyTileXML = '<tile><visual version="2"><binding template="TileSquare150x150Text01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
+            $MyTileXML = '<tile>
   <visual>
     <binding template="TileSquareText01">
-      <text id="1">\'.$tick_name.\' (larger text)</text>
-      <text id="2">\'.$value.\'</text>
+      <text id="1">'.$tick_name.'</text>
+      <text id="2">'.$value.'</text>
     </binding>
   </visual>
 </tile>
@@ -126,11 +126,11 @@ class FileShell extends Shell
 <tile>
   <visual version="2">
     <binding template="TileSquare150x150Text01" fallback="TileSquareText01">
-      <text id="1">\'.$tick_name.\' (larger text)</text>
-      <text id="2">\'.$value.\'</text>
+      <text id="1">'.$tick_name.'</text>
+      <text id="2">'.$value.'</text>
     </binding>
   </visual>
-</tile>';*/
+</tile>';
             $responseToSendMsg = $Notifier->Send($channelURI,$MyTileXML);
             Debugger::dump($responseToSendMsg);
         }
