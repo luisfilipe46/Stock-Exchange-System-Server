@@ -73,13 +73,38 @@ class FileShell extends Shell
         $NotifierTile = new WindowsNotificationClass($OptionsTile);
 
 
-
         $allStocks = $this->Stocks->find('all')->toArray();
         //$allStocks = $this->Stocks->find('all')->group(['Stocks.device_id'])->toArray();
         //$allStocks = $this->Stocks->Devices->find()->group(['Devices.id'])->toArray();
 
         Debugger::dump('allStocks: ');
         Debugger::dump($allStocks);
+
+        $allStocksByDeviceId = array();
+
+        for($i = 0; $i < sizeof($allStocks); $i++)
+        {
+            $actualDeviceId = $allStocks[$i]['device_id'];
+
+            $added = false;
+            for($a = 0; $a < sizeof($allStocksByDeviceId); $a++)
+            {
+                if ($allStocksByDeviceId[$a]['device_id'] == $actualDeviceId)
+                {
+                    $allStocksByDeviceId[$a]['stocks'][] = $allStocks[$i];
+                    $added = true;
+                }
+            }
+
+            if (!$added)
+            {
+                $allStocksByDeviceId[] = ['device_id' => $actualDeviceId, 'stocks' => [$allStocks[$i]]];
+            }
+        }
+
+        Debugger::dump('allStocksByDeviceId: ');
+        Debugger::dump($allStocksByDeviceId);
+
 
         $someStocks = $this->Stocks->find()->distinct(['tick_name'])->toArray();
         for ($i = 0; $i < sizeof($someStocks); $i++) {
