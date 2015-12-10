@@ -143,14 +143,20 @@ class FileShell extends Shell
     {
         $stocksAffectedMax=array();
         $stocksAffectedMin=array();
+        $valueOfStocksAffectedMax = array();
+        $valueOfStocksAffectedMin = array();
 
         for ($i = 0; $i < sizeof($tick_names_and_values); $i++) {
             $stockAffectedMax = $this->Stocks->find()->where(['maximum <=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
             $stockAffectedMin = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
-            for ($a = 0; $a < sizeof($stockAffectedMax); $a++)
+            for ($a = 0; $a < sizeof($stockAffectedMax); $a++) {
                 $stocksAffectedMax[] = $stockAffectedMax[$a];
-            for ($a = 0; $a < sizeof($stockAffectedMin); $a++)
+                $valueOfStocksAffectedMax[] = $tick_names_and_values[$i][1];
+            }
+            for ($a = 0; $a < sizeof($stockAffectedMin); $a++) {
                 $stocksAffectedMin[] = $stockAffectedMin[$a];
+                $valueOfStocksAffectedMin[] = $tick_names_and_values[$i][1];
+            }
         }
 
         Debugger::dump('stocksAffectedMax: ');
@@ -170,7 +176,7 @@ class FileShell extends Shell
 
             //$MyToastXML = '<toast><visual><binding template="ToastText02"><text id="1">'.$stocksAffectedMax[$i]['tick_name'].' atingiu máximo'.'</text><text id="2">VALOR</text></binding></visual></toast>';
             //$responseToSendMsg = $Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMax[$i]['tick_name'] . " atingiu máximo!"));
-            $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu máximo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
+            $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu máximo!", $valueOfStocksAffectedMax[$i],TemplateToast::NotificationMail));
             //$responseToSendMsg = $Notifier->Send($channelURI,$MyToastXML);
             Debugger::dump($responseToSendMsg);
         }
@@ -187,7 +193,7 @@ class FileShell extends Shell
 
             //$MyToastXML = '<toast><visual><binding template="ToastText02"><text id="1">'.$stocksAffectedMin[$i]['tick_name'].' atingiu mínimo'.'</text><text id="2">VALOR</text></binding></visual></toast>';
             //$responseToSendMsg = $Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMin[$i]['tick_name'] . " atingiu mínimo!"));
-            $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMin[$i]['tick_name']." atingiu mínimo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
+            $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMin[$i]['tick_name']." atingiu mínimo!", $valueOfStocksAffectedMin[$i],TemplateToast::NotificationMail));
             //$responseToSendMsg = $Notifier->Send($channelURI,$MyToastXML);
             Debugger::dump($responseToSendMsg);
         }
