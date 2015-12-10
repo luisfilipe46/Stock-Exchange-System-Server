@@ -156,7 +156,7 @@ class FileShell extends Shell
         for ($i = 0; $i < sizeof($stocksAffectedMax); $i++) {
             if (!empty($stocksAffectedMax[$i]))
             {
-                Debugger::dump("$stocksAffectedMax[".$i."]");
+                Debugger::dump('$stocksAffectedMax['.$i.']');
                 Debugger::dump($stocksAffectedMax[$i]);
                 $id = $stocksAffectedMax[$i]['device_id'];
                 $device = $this->Devices->get($id, [
@@ -174,7 +174,7 @@ class FileShell extends Shell
         for ($i = 0; $i < sizeof($stocksAffectedMin); $i++) {
             if (!empty($stocksAffectedMin[$i]))
             {
-                Debugger::dump("$stocksAffectedMin[".$i."]");
+                Debugger::dump('$stocksAffectedMin['.$i.']');
                 Debugger::dump($stocksAffectedMin[$i]);
                 $id = $stocksAffectedMin[$i]['device_id'];
                 $device = $this->Devices->get($id, [
