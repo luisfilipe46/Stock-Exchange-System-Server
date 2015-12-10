@@ -74,7 +74,10 @@ class FileShell extends Shell
 
 
 
-        $allStocks = $this->Stocks->find('all')->toArray();
+        //$allStocks = $this->Stocks->find('all')->toArray();
+        $allStocks = $this->Stocks->find('all')->group(['Articles.id'])->toArray();
+        Debugger::dump($allStocks);
+
         $someStocks = $this->Stocks->find()->distinct(['tick_name'])->toArray();
         for ($i = 0; $i < sizeof($someStocks); $i++) {
             $response = $http->get('http://download.finance.yahoo.com/d/quotes?f=sl1d1t1v&s=' . $someStocks[$i]['tick_name']);
@@ -115,25 +118,7 @@ class FileShell extends Shell
 
             $MyTileXML1 = '<tile><visual version="2"><binding template="TileSquare150x150Text01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
             $MyTileXML2 = '<tile><visual version="2"><binding template="TileWide310x150BlockAndText01" fallback="TileSquareText01"><text id="1">'.$tick_name.'</text><text id="2">'.$value.'</text></binding></visual></tile>';
-/*<visual version="2"><binding template="TileWide310x150BlockAndText01" fallback="TileSquareText01"><text id="1">\'.$tick_name.\'</text><text id="2">\'.$value.\'</text></binding></visual>
-</tile>';
-            /*$MyTileXML = '<tile>
-  <visual>
-    <binding template="TileSquareText01">
-      <text id="1">'.$tick_name.'</text>
-      <text id="2">'.$value.'</text>
-    </binding>
-  </visual>
-</tile>
 
-<tile>
-  <visual version="2">
-    <binding template="TileSquare150x150Text01" fallback="TileSquareText01">
-      <text id="1">'.$tick_name.'</text>
-      <text id="2">'.$value.'</text>
-    </binding>
-  </visual>
-</tile>';*/
             $responseToSendMsg1 = $Notifier->Send($channelURI,$MyTileXML1);
             Debugger::dump($responseToSendMsg1);
             $responseToSendMsg2 = $Notifier->Send($channelURI,$MyTileXML2);
