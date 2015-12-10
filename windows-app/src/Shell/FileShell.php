@@ -82,7 +82,7 @@ class FileShell extends Shell
             $tick_names_and_values[] = [str_replace("\"", "", $tick_name), explode(",", $response->body())[1]];
         }
 
-        Debugger::dump("$tick_names_and_values: ");
+        Debugger::dump('tick_names_and_values: ');
         Debugger::dump($tick_names_and_values);
 
         //$this->sendAllStocksNotificationsInTileNotifications($NotifierToast, $tick_names_and_values, $allStocks);
@@ -148,9 +148,9 @@ class FileShell extends Shell
             $stocksAffectedMin = $this->Stocks->find()->where(['minimum >=' => $tick_names_and_values[$i][1], 'tick_name =' => $tick_names_and_values[$i][0]])->toArray();
         }
 
-        Debugger::dump("$stocksAffectedMax: ");
+        Debugger::dump('stocksAffectedMax: ');
         Debugger::dump($stocksAffectedMax);
-        Debugger::dump("$stocksAffectedMin: ");
+        Debugger::dump('stocksAffectedMin: ');
         Debugger::dump($stocksAffectedMin);
 
         for ($i = 0; $i < sizeof($stocksAffectedMax); $i++) {
