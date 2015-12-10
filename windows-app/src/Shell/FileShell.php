@@ -151,28 +151,34 @@ class FileShell extends Shell
         Debugger::dump($stocksAffectedMin);
 
         for ($i = 0; $i < sizeof($stocksAffectedMax); $i++) {
-            $id = $stocksAffectedMax[$i]['device_id'];
-            $device = $this->Devices->get($id, [
-                'contain' => []
-            ]);
-            $channelURI = $device['name'];
+            if (!empty($stocksAffectedMax[$i]))
+            {
+                $id = $stocksAffectedMax[$i]['device_id'];
+                $device = $this->Devices->get($id, [
+                    'contain' => []
+                ]);
+                $channelURI = $device['name'];
 
-            $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu máximo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
-            //$Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMax[$i]['tick_name'] . " atingiu máximo!"));
-            Debugger::dump('$i: '.$i);
-            Debugger::dump($responseToSendMsg);
+                $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu máximo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
+                //$Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMax[$i]['tick_name'] . " atingiu máximo!"));
+                Debugger::dump('$i: '.$i);
+                Debugger::dump($responseToSendMsg);
+            }
         }
 
         for ($i = 0; $i < sizeof($stocksAffectedMin); $i++) {
-            $id = $stocksAffectedMin[$i]['device_id'];
-            $device = $this->Devices->get($id, [
-                'contain' => []
-            ]);
-            $channelURI = $device['name'];
-            //$responseToSendMsg = $Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMin[$i]['tick_name'] . " atingiu mínimo!"));
-            $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu mínimo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
-            Debugger::dump('$i: '.$i);
-            Debugger::dump($responseToSendMsg);
+            if (!empty($stocksAffectedMax[$i]))
+            {
+                $id = $stocksAffectedMin[$i]['device_id'];
+                $device = $this->Devices->get($id, [
+                    'contain' => []
+                ]);
+                $channelURI = $device['name'];
+                //$responseToSendMsg = $Notifier->Send($channelURI, TemplateToast::ToastText01($stocksAffectedMin[$i]['tick_name'] . " atingiu mínimo!"));
+                $responseToSendMsg = $Notifier->Send($channelURI,TemplateToast::ToastText02($stocksAffectedMax[$i]['tick_name']." atingiu mínimo!","Valor TOCOMPLET",TemplateToast::NotificationMail));
+                Debugger::dump('$i: '.$i);
+                Debugger::dump($responseToSendMsg);
+            }
         }
     }
 }
