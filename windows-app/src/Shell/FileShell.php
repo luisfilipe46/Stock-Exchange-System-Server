@@ -179,8 +179,8 @@ class FileShell extends Shell
 
                 for ($aaa = 0; $aaa < sizeof($tick_names_and_values); $aaa++)
                 {
-                    if ($tick_names_and_values[$a][0] == $tick_name)
-                        $value = $tick_names_and_values[$a][1];
+                    if ($tick_names_and_values[$aaa][0] == $tick_name)
+                        $value = $tick_names_and_values[$aaa][1];
                 }
 
                 $MyTileXML1 = $MyTileXML1.'<text id="'.($textId).'">'.$tick_name.': '.$value.'</text>';
