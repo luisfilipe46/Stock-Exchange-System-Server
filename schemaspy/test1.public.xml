@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="test1" schema="public" type="PostgreSQL - 9.3.10">
+   <tables>
+      <table name="devices" numRows="4" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('devices_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="device_id" foreignKey="stocks_device_id" implied="false" onDeleteCascade="true" table="stocks"/>
+            <parent column="id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="stocks"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" digits="6" id="2" name="created" nullable="false" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="6" id="3" name="modified" nullable="false" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="4" name="wp_id" nullable="false" remarks="" size="255" type="varchar"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="devices_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="phinxlog" numRows="3" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="version" nullable="false" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="6" id="1" name="start_time" nullable="false" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="6" id="2" name="end_time" nullable="false" remarks="" size="29" type="timestamp"/>
+         <primaryKey column="version" sequenceNumberInPK="1"/>
+         <index name="phinxlog_pkey" unique="true">
+            <column ascending="true" name="version"/>
+         </index>
+      </table>
+      <table name="stocks" numRows="7" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('stocks_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="devices"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="device_id" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="stocks_device_id" implied="false" onDeleteCascade="true" table="devices"/>
+         </column>
+         <column autoUpdated="false" digits="8" id="2" name="minimum" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="8" id="3" name="maximum" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="4" name="tick_name" nullable="false" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" digits="6" id="5" name="created" nullable="false" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="6" id="6" name="modified" nullable="false" remarks="" size="29" type="timestamp"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="stocks_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+   </tables>
+</database>
